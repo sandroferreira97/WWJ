@@ -105,13 +105,6 @@ public class Functions {
 		return true;
 	}
 	
-	public static boolean isGrupoRep(Peregrino p, Grupo g) {
-		if(p.grupos.contains(g.getId())) {
-			return true;
-		}else {
-//			p.grupos.add(g);
-			return false;
-		}
-	}
+	
 
 }

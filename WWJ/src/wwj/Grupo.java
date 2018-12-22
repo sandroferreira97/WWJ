@@ -26,6 +26,8 @@ public class Grupo {
 					membros.get(i).addCol(x);
 				}
 				membros.add(x);
+				x.grupos.add(this.getId());
+				
 				return true;
 			}
 			return false;
@@ -54,8 +56,10 @@ public class Grupo {
 					membros.get(i).addCol(x);
 				}
 				membros.add(x);
+				if(groupRep(x,this)) {
+//				System.out.println(x.grupos);
 				return true;
-				
+				}
 			}
 		}
 		return false;

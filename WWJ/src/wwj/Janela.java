@@ -146,19 +146,13 @@ public class Janela {
 							p.get(b).reset();
 						}
 						System.out.println(i);
-						if (Functions.Sort(p, d, (int) spinnerDias.getValue(), i, (int) spinnerRep.getValue())) {
-							for(int c = 0; c < p.size(); c++) {
-								if(p.get(c).grupos.size()==(int)spinnerGrupo.getValue()) {
-									
-									corre = false;
-								}
-							}
-							
+						if (Functions.Sort(p, d, (int) spinnerDias.getValue(), i, (int) spinnerRep.getValue())) {								
+									corre = false;	
 						}
 						i++;
 					}
 					
-						System.out.println("terminado");
+						
 						
 				}
 			}
