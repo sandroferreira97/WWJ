@@ -141,7 +141,7 @@ public class Janela {
 					d = Functions.Divison(p.size(), (int) spinnerGrupo.getValue());
 					boolean corre = true;
 					int i = 0;
-					while (corre && i < 500000) {
+					while (corre && i < 5000000) {
 						for (int b = 0; b < p.size(); b++) {
 							p.get(b).reset();
 						}
@@ -155,8 +155,9 @@ public class Janela {
 						
 						
 				}
+				System.out.println("terminou");
 			}
-
+		
 		});
 
 	}

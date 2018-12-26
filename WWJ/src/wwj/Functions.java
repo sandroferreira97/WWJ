@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Functions {
+	
+	static ArrayList<Grupo> group;
 
 	public static ArrayList<Peregrino> Load(File f) {
 		Scanner scan;
@@ -59,8 +61,7 @@ public class Functions {
 		if (corre) {
 
 			for (int k = 0; k < nDias; k++) {
-				ArrayList<Grupo> group = new ArrayList<Grupo>();
-				 System.out.println("-------DIA " + k + "--------");
+				group = new ArrayList<Grupo>();
 				ArrayList<Peregrino> temp = new ArrayList<Peregrino>();
 				for (int p = 0; p < per.size(); p++) {
 					temp.add(per.get(p));
@@ -84,17 +85,23 @@ public class Functions {
 					}
 					
 
-					 System.out.println(":::::::::GRUPO " + i + "::::::::::");
-					 System.out.println(group.get(i).toString());
-					 
+
 					 
 				}
-				System.out.println("");
-				System.out.println("");
+
 			}
 			
 			
 		}
+		
+		for (int k = 0; k < nDias; k++) {
+			 System.out.println("-------DIA " + k + "--------");
+			 for (int i = 0; i < grupos.length; i++) {
+				 System.out.println(":::::::::GRUPO " + i + "::::::::::");
+				 System.out.println(group.get(i).toString());
+			 }
+		}
+		
 		for(int i = 0; i< per.get(0).grupos.size();i++) {
 		System.out.println(per.get(0).grupos.get(i));
 		}

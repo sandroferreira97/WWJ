@@ -45,7 +45,7 @@ public class Grupo {
 				}
 				if(j>gr/2) {
 					System.out.println("1111111111111111111111111111111111111111");
-					return false;
+//					return false;
 				}
 			
 				
