@@ -3,6 +3,9 @@ package wwj;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
@@ -87,7 +90,7 @@ public class Janela {
 					p = Functions.Load(chooser.getSelectedFile());
 					ficheiro = true;
 				}
-				
+
 			}
 		});
 
@@ -131,8 +134,7 @@ public class Janela {
 		spinnerRep.setModel(new SpinnerNumberModel(new Integer(0), new Integer(0), null, new Integer(1)));
 		spinnerRep.setBounds(249, 19, 30, 22);
 		frame.getContentPane().add(spinnerRep);
-		
-		
+
 		btnCalcular.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (!ficheiro) {
@@ -146,18 +148,18 @@ public class Janela {
 							p.get(b).reset();
 						}
 						System.out.println(i);
-						if (Functions.Sort(p, d, (int) spinnerDias.getValue(), i, (int) spinnerRep.getValue())) {								
-									corre = false;	
-						}
+						
+							if (Functions.Sort(p, d, (int) spinnerDias.getValue(), i, (int) spinnerRep.getValue())) {
+								corre = false;
+							}
+					
 						i++;
 					}
-					
-						
-						
+
 				}
 				System.out.println("terminou");
 			}
-		
+
 		});
 
 	}

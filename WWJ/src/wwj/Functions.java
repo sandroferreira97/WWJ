@@ -1,14 +1,28 @@
 package wwj;
 
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+import java.io.Writer;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
 public class Functions {
-	
-	static ArrayList<Grupo> group;
+
+	public static ArrayList<Grupo> groupFinal = new ArrayList<Grupo>();
+//	public static ArrayList<ArrayList<Grupo>> groupFinals = new ArrayList<ArrayList<Grupo>>();
 
 	public static ArrayList<Peregrino> Load(File f) {
 		Scanner scan;
@@ -54,64 +68,68 @@ public class Functions {
 
 	}
 
-	public static boolean Sort(ArrayList<Peregrino> per, int[] grupos, int nDias, int retry,int maxRetry) {
+	public static boolean Sort(ArrayList<Peregrino> per, int[] grupos, int nDias, int retry, int maxRetry) {
 		int f = 0;
+		int z = 0;
 		boolean corre = true;
-
+		ArrayList<ArrayList<Grupo>> groupFinals = new ArrayList<ArrayList<Grupo>>();
 		if (corre) {
 
 			for (int k = 0; k < nDias; k++) {
-				group = new ArrayList<Grupo>();
+				ArrayList<Grupo> group = new ArrayList<Grupo>();
 				ArrayList<Peregrino> temp = new ArrayList<Peregrino>();
 				for (int p = 0; p < per.size(); p++) {
 					temp.add(per.get(p));
 				}
 				for (int i = 0; i < grupos.length; i++) {
 
-					group.add(new Grupo(i + 1,maxRetry));
+					group.add(new Grupo(i + 1, maxRetry));
 					for (int j = 0; j < grupos[i]; j++) {
 						f = (int) (Math.random() * temp.size());
-//						if(Grupo.groupRep(temp.get(f), group.get(i)))
-						if(!group.get(i).getMembros().contains(temp.get(f))) {
-							if (group.get(i).addEl(temp.get(f),retry,grupos[i])) {
-//								temp.get(f).grupos.add(group.get(i).getId());
-								temp.remove(f);
-							}else{
-								return false;
-							}
-						}else {
+//						z = (int) (Math.random() * group.size());
+						if (group.get(i).addEl(temp.get(f), retry, grupos[i])) {
+							temp.remove(f);
+						} else {
 							return false;
 						}
 					}
-					
 
-
-					 
 				}
-
+				groupFinals.add(group);
 			}
-			
-			
 		}
-		
-		for (int k = 0; k < nDias; k++) {
-			 System.out.println("-------DIA " + k + "--------");
-			 for (int i = 0; i < grupos.length; i++) {
-				 System.out.println(":::::::::GRUPO " + i + "::::::::::");
-				 System.out.println(group.get(i).toString());
-			 }
+
+		System.out.println("tamanho: " + groupFinals.size());
+		for (int i = 0; i < groupFinals.size(); i++) {
+			for (int j = 0; j < grupos.length; j++) {
+				System.out.println("grupo -- " + groupFinals.get(i).get(j).getId());
+				System.out.println(groupFinals.get(i).get(j).toString());
+			}
 		}
-		
-		for(int i = 0; i< per.get(0).grupos.size();i++) {
-		System.out.println(per.get(0).grupos.get(i));
+
+		for (int i = 0; i < per.get(0).grupos.size(); i++) {
+			System.out.println(per.get(0).grupos.get(i));
 		}
 		System.out.println(per.get(0).getNome());
-	
-		
-		
+
+		try (FileWriter fw = new FileWriter("resultados.txt", true);
+				BufferedWriter bw = new BufferedWriter(fw);
+				PrintWriter out = new PrintWriter(bw)) {
+			for (int i = 0; i < groupFinals.size(); i++) {
+				out.println("Dia---" + i);
+				for (int j = 0; j < grupos.length; j++) {
+					out.println("grupo -- " + groupFinals.get(i).get(j).getId());
+					out.println(groupFinals.get(i).get(j).toString());
+				}
+				out.println("");
+			}
+			
+
+		} catch (IOException e) {
+			// exception handling left as an exercise for the reader
+		}
+
 		return true;
 	}
-	
-	
 
 }
