@@ -44,10 +44,10 @@ public class Grupo {
 					membros.get(i).addCol(x);
 				}
 				membros.add(x);
-				x.grupos.add(this.getId());
-//				if(groupRep(x,this)) {
+//				x.grupos.add(this.getId());
+				if(groupRep(x,this)) {
 				return true;
-//				}
+				}
 			}
 		}
 		return false;
@@ -73,10 +73,14 @@ public class Grupo {
 
 	public static boolean groupRep(Peregrino p, Grupo g) {
 		if (p.grupos.contains(g.getId())) {
-			return false;
+			if (p.maxRep(4)) {
+				return true;
+			}
 		} else {
+			p.gRep();
 			p.grupos.add(g.getId());
 			return true;
 		}
+		return false;
 	}
 }

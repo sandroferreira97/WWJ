@@ -81,12 +81,14 @@ public class Functions {
 				for (int p = 0; p < per.size(); p++) {
 					temp.add(per.get(p));
 				}
+				
+				
 				for (int i = 0; i < grupos.length; i++) {
 
 					group.add(new Grupo(i + 1, maxRetry));
+					z = (int) (Math.random() * group.size());
 					for (int j = 0; j < grupos[i]; j++) {
 						f = (int) (Math.random() * temp.size());
-//						z = (int) (Math.random() * group.size());
 						if (group.get(i).addEl(temp.get(f), retry, grupos[i])) {
 							temp.remove(f);
 						} else {
