@@ -81,8 +81,7 @@ public class Functions {
 				for (int p = 0; p < per.size(); p++) {
 					temp.add(per.get(p));
 				}
-				
-				
+
 				for (int i = 0; i < grupos.length; i++) {
 
 					group.add(new Grupo(i + 1, maxRetry));
@@ -114,13 +113,24 @@ public class Functions {
 		}
 		System.out.println(per.get(0).getNome());
 
+		PrintWriter writer = null;
+		try {
+			writer = new PrintWriter("resultados.txt");
+		} catch (FileNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		writer.print("");
+		writer.close();
+
 		try (FileWriter fw = new FileWriter("resultados.txt", true);
 				BufferedWriter bw = new BufferedWriter(fw);
 				PrintWriter out = new PrintWriter(bw)) {
 			for (int i = 0; i < groupFinals.size(); i++) {
-				out.println("Dia---" + i);
+				int dia = i +1;
+				out.println("Dia---" + dia);
 				for (int j = 0; j < grupos.length; j++) {
-					out.println("grupo -- " + groupFinals.get(i).get(j).getId());
+					out.print("grupo-" + groupFinals.get(i).get(j).getId() + ", ");
 					out.println(groupFinals.get(i).get(j).toString());
 				}
 				out.println("");
@@ -130,6 +140,32 @@ public class Functions {
 		} catch (IOException e) {
 			// exception handling left as an exercise for the reader
 		}
+
+//		PrintWriter pw = null;
+//		try {
+//			pw = new PrintWriter(new File("resultados.csv"));
+//		} catch (FileNotFoundException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		StringBuilder sb = new StringBuilder();
+//		for (int i = 0; i < groupFinals.size(); i++) {
+////			sb.append("dia");
+//			for (int j = 0; j < grupos.length; j++) {
+//				sb.append("Grupo");
+//				sb.append(',');
+//				sb.append("Peregrino");
+//				sb.append('\n');
+//
+//				sb.append(groupFinals.get(i).get(j).getId());
+//				sb.append(',');
+//				sb.append(groupFinals.get(i).get(j).toString());
+//				sb.append('\n');
+//			}
+//		}
+//
+//		pw.write(sb.toString());
+//		pw.close();
 
 		return true;
 	}

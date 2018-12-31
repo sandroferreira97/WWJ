@@ -58,7 +58,7 @@ public class Grupo {
 		String resul = "";
 		for (int i = 0; i < membros.size(); i++) {
 			resul += membros.get(i).getNome();
-			resul += "  ";
+			resul += ",  ";
 		}
 		return resul;
 	}
